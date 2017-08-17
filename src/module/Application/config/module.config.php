@@ -51,6 +51,25 @@ return array(
                     ),
                 ),
             ),
+            'evento' => array(
+                'type' => 'Segment',
+                'options' => array(
+                    'route' => '/evento[/][:action][/:id][/:var]',
+                    'constraints' => array(
+                        'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                        'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                        'var' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                        'id'=>'[0-9]+',
+                    ),
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Application\Controller',
+                        'controller' => 'Evento',
+                        'action' => 'index',
+
+                    ),
+                ),
+
+            ),
         ),
     ),
     'service_manager' => array(
@@ -74,7 +93,8 @@ return array(
     ),
     'controllers'     => array(
         'invokables' => array(
-            'Application\Controller\Index' => 'Application\Controller\IndexController'
+            'Application\Controller\Index' => 'Application\Controller\IndexController',
+             'Application\Controller\Evento' => 'Application\Controller\EventoController'
         ),
     ),
     'view_manager'    => array(

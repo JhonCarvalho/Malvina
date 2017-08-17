@@ -5,3 +5,34 @@
 # Gerar Getters/Setters
 
 - doctrine-module orm:generate-entities  module/Application/src/ --generate-annotations=true
+
+
+
+#doctrine_orm.local.php
+
+<?php
+/**
+ * Created by PhpStorm.
+ * User: jhon.carvalho
+ * Date: 22/06/2017
+ * Time: 10:14
+ */
+return array(
+    'doctrine' => array(
+        'connection' => array(
+            'orm_default' => array(
+                'driverClass' => 'Doctrine\DBAL\Driver\PDOMySql\Driver',
+                'params'      => array(
+                    'host'          => '127.0.0.1',
+                    'port'          => '3306',
+                    'user'          => 'root',
+                    'password'      => '',
+                    'dbname'        => 'desafio',
+                    'driverOptions' => array(
+                        1002 => 'SET NAMES utf8'
+                    )
+                )
+            )
+        )
+    ),
+);

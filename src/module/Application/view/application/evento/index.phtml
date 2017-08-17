@@ -1,0 +1,23 @@
+<h1>Novo Evento</h1>
+
+<?php
+
+
+$form = $this->form;
+
+
+echo $this->form()->openTag($form);
+
+echo $this->FormRow($form->get('nome_evento')) . "</br></br>";
+echo $this->FormRow($form->get('local')) . "</br></br>";
+echo $this->FormRow($form->get('dt_evento')) . "</br></br>";
+echo $this->FormRow($form->get('vl_total')) . "</br></br>";
+echo $this->FormRow($form->get('contratante')) . "</br></br>";
+echo $this->FormRow($form->get('vendedor')) . "</br></br>";
+echo $this->FormRow($form->get('vl_liquido')) . "</br></br>";
+echo $this->FormRow($form->get('descricao')) . "</br></br>";
+echo $this->FormRow($form->get('vl_caixa')) . "</br></br>";
+echo $this->FormRow($form->get('cache_integrante')) . "</br></br>";
+echo $this->FormRow($form->get('operacao')) . "</br></br>";
+
+echo $this->form()->closeTag($form);
