@@ -1,0 +1,47 @@
+version: '3.1'
+services:
+  web:
+    image: andreluizs/nginx
+    container_name: nginx
+    build:
+      context: .
+      dockerfile: build/nginx/Dockerfile
+    volumes:
+    - ./data/nginx/logs:/var/log/nginx/
+    - ./src/:/usr/share/nginx/html/
+    ports:
+      - ${HTTP_PORT}:80
+      - ${HTTPS_PORT}:443
+
+  db:
+    image: andreluizs/mysql
+    container_name: mysql
+    build:
+      context: .
+      dockerfile: build/mysql/Dockerfile
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+    volumes:
+      - ./data/mysql:/var/lib/mysql
+    ports:
+      - ${MYSQL_PORT}:3306
+
+  php:
+    image: andreluizs/php:5.6-fpm
+    container_name: php
+    build:
+      context: .
+      dockerfile: build/php/Dockerfile
+    environment: 
+      XDEBUG_CONFIG: remote_host=${REMOTE_IP}
+    volumes:
+      - ./src/:/usr/share/nginx/html/
+  
+  pma:
+    image: phpmyadmin/phpmyadmin
+    container_name: pma
+    depends_on:
+      - db
+    ports:
+     - ${PHP_MY_ADMIN_PORT}:80
