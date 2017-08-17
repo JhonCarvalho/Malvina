@@ -12,7 +12,7 @@ use Zend\Form\Form;
 class formEvento extends Form
 {
 
-    public function __construct($name, array $options)
+    public function __construct($name= null)
     {
         parent::__construct('inserirEvento');
 
