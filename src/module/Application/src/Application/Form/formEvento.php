@@ -102,7 +102,7 @@ class formEvento extends Form
             ),
             'name' => 'descricao',
             'attributes' => array(
-                'type' => 'text',
+                'type' => 'textarea',
                 'placeholder' => 'Descrição do que foi feito no evento ',
                 'class' => 'form-control',
             ),
@@ -133,7 +133,7 @@ class formEvento extends Form
             'type' => 'select',
             'options' => array(
                 'label' => 'Operação',
-                'valeu_options'=>array(
+                'value_options'=>array(
                     'D'=>'Investimento',
                     'C'=>'Show'
                 )
@@ -143,6 +143,29 @@ class formEvento extends Form
                 'placeholder' => 'Operação ...',
                 'class' => 'form-control',
             ),
+        ));
+        $this->add(array(
+
+            'name' => 'cancelar',
+            'attributes' => array(
+                'type' => 'reset',
+                'value' => 'Cancelar',
+                'data-dismiss'=>'modal',
+                'class' => 'btn btn-default',
+            ),
+
+
+        ));
+        $this->add(array(
+            'name' => 'salvar',
+            'attributes' => array(
+                'id'=>'salvar',
+                'value' => 'Salvar',
+                'class' => 'btn btn-red ',
+                'type' => 'submit',
+            ),
+
+
         ));
         /*$this->add(array(
             ''

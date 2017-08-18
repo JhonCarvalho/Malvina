@@ -35,3 +35,30 @@ div.container a.brand {
     margin-left: 0;
     padding: 8px 20px 12px 40px;
 }
+.tbAdd th{
+    padding-left: 47px;
+    padding-right: 47px;
+    padding-top: 40px;
+}
+
+label{
+    color: #c12e2a;
+    font-family: Georgia;
+}
+h2,h1{
+    color: #c12e2a;
+    font-family: Georgia;
+}
+body.evento{
+    background-image: linear-gradient(to bottom,rgba(191, 5, 5, 0.26) 0,#ffffff 100%);
+}
+.divDespesa{
+    float: right;
+    margin-top: 10px;
+    padding-left: 47px;
+    padding-right: 47px;
+    border: 1px solid #c12e2a;
+    border-radius: 25px;
+    width: 280px;
+    height: 220px;
+}

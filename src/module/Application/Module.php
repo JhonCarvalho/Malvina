@@ -11,6 +11,7 @@ namespace Application;
 
 use Zend\Mvc\ModuleRouteListener;
 use Zend\Mvc\MvcEvent;
+use Zend\ServiceManager\ServiceManager;
 
 class Module
 {
@@ -36,4 +37,14 @@ class Module
             ),
         );
     }
+
+    public function getServiceConfig(){
+        return array(
+            'factories'=>["EventoService" => function(ServiceManager $serviceManager){
+                $em = $serviceManager->get('Doctrine\ORM\EntityManager');
+                return new Service\EventoService($serviceManager, $em);
+            }]
+        );
+    }
+    
 }

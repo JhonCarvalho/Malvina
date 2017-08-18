@@ -1,0 +1,61 @@
+<h1>Novo Evento</h1>
+
+<?php
+
+
+$form = $this->form;
+
+echo '<div style="border: 1px solid #c12e2a;border-radius: 25px;" >';
+echo $this->form()->openTag($form);
+echo '<div style=" float: left"><table class="tbAdd"><tr><th>';
+echo $this->FormRow($form->get('nome_evento')) . "</br></br>";
+echo '</th><th>';
+echo $this->FormRow($form->get('local')) . "</br></br>";
+echo '</th><th>';
+echo $this->FormRow($form->get('dt_evento')) . "</br></br>";
+echo '</th></tr>';
+echo'<tr><th>';
+echo $this->FormRow($form->get('vl_total')) . "</br></br>";
+echo '</th><th>';
+echo $this->FormRow($form->get('contratante')) . "</br></br>";
+echo '</th><th>';
+echo $this->FormRow($form->get('vendedor')) . "</br></br>";
+echo '</th></tr>';
+echo'<tr><th>';
+echo $this->FormRow($form->get('vl_liquido')) . "</br></br>";
+echo '</th><th>';
+echo $this->FormRow($form->get('operacao')) . "</br></br>";
+
+echo '</th><th>';
+echo $this->FormRow($form->get('vl_caixa')) . "</br></br>";
+echo '</th></tr>';
+echo'<tr><th>';
+echo $this->FormRow($form->get('cache_integrante')) . "</br></br>";
+echo '</th><th>';
+echo $this->FormRow($form->get('descricao')) . "</br></br>";
+echo '</th><th>';
+echo $this->FormRow($form->get('salvar')).'     ';
+echo $this->FormRow($form->get('cancelar')) . "</br></br>";
+echo '</th></tr></table></div>';
+
+echo $this->form()->closeTag($form);
+?>
+<div class='divDespesa'>
+    <h2>Despesas <a id="desp" class="btn btn-danger"><span class="glyphicon glyphicon-plus"></span></a></h2>
+    <p id="pdesp" ></p>
+</div>
+<div class='divDespesa'>
+    <h2>   Equipe  <a id="eq" class="btn btn-danger"><span class="glyphicon glyphicon-plus"></span></a></h2>
+    <p id="peq" ></p>
+</div>
+</div>
+<script>
+    $('#eq').on('click', function () {
+        $('#peq').html($('#peq').html()+'<br>ooo');
+    });
+
+    $('#desp').on('click', function () {
+        $('#pdesp').html($('#pdesp').html()+'<br>ooo');
+    });
+</script>
+
