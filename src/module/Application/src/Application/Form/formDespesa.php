@@ -9,7 +9,35 @@
 namespace Application\Form;
 
 
-class formDespesa
+use Zend\Form\Form;
+
+class formDespesa extends Form
 {
 
+    public function __construct($name=null)
+    {
+        parent::__construct('inserirDespesa');
+        $this->add(array(
+           'options'=>array(
+               'label'=>'Descrição'
+           ),
+            'name'=>'descricao',
+            'attributes'=>array(
+                'type'=>'textarea',
+                'class'=>'form-control'
+            )
+
+        ));
+
+        $this->add(array(
+            'options'=>array(
+                'label'=>'Valor total'
+            ),
+            'name'=>'vl_total',
+            'attributes'=>array(
+                'type'=>'text',
+                'class'=>'form-control',
+            )
+        ));
+    }
 }

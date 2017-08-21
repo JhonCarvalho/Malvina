@@ -1,6 +1,8 @@
 <h1>Novo Evento</h1>
 
 <?php
+     echo $this->headScript()
+        ->prependFile($this->basePath() . '/js/app/evento/index.js');
 
 
 $form = $this->form;
@@ -41,8 +43,8 @@ echo '</th></tr></table></div>';
 echo $this->form()->closeTag($form);
 ?>
 <div class='divDespesa'>
-    <h2>Despesas <a id="desp" class="btn btn-danger"><span class="glyphicon glyphicon-plus"></span></a></h2>
-    <p id="pdesp" ></p>
+    <h2>Despesas <a id="desp" onclick="addDespesa()" class="btn btn-danger"><span class="glyphicon glyphicon-plus"></span></a></h2>
+    <ul id="pdesp" ></ul>
 </div>
 <div class='divDespesa'>
     <h2>   Equipe  <a id="eq" class="btn btn-danger"><span class="glyphicon glyphicon-plus"></span></a></h2>
@@ -50,12 +52,14 @@ echo $this->form()->closeTag($form);
 </div>
 </div>
 <script>
-    $('#eq').on('click', function () {
+  /*  $('#eq').on('click', function () {
         $('#peq').html($('#peq').html()+'<br>ooo');
     });
 
     $('#desp').on('click', function () {
         $('#pdesp').html($('#pdesp').html()+'<br>ooo');
-    });
+    });*/
 </script>
+
+<div id="dialogDespesa"></div>
 

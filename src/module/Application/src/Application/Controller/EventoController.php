@@ -10,6 +10,7 @@ namespace Application\Controller;
 
 
 use Application\Entity\Evento;
+use Application\Form\formDespesa;
 use Application\Form\formEvento;
 
 use Zend\Mvc\Controller\AbstractActionController;
@@ -58,7 +59,18 @@ class EventoController extends AbstractActionController
         
     }
     public function menuDespesaAction(){
-        
-        return new ViewModel();
+
+        $data = $this->getRequest();
+
+        if($data->isPost()){
+
+        }else{
+            $form = new formDespesa();
+            $resp = array('form'=>$form);
+            $viewModel = new ViewModel($resp);
+            $viewModel->setTerminal(true);
+            return $viewModel;
+        }
+
     }
 }

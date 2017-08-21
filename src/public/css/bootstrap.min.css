@@ -3438,10 +3438,17 @@ input[type="submit"].btn-block, input[type="reset"].btn-block, input[type="butto
 }
 
 .btn-group-sm > .btn {
-    padding: 5px 10px;
-    font-size: 12px;
+     padding: 5px 10px;
+     font-size: 12px;
+     line-height: 1.5;
+     border-radius: 3px
+ }
+
+.btn-group-mini > .btn {
+    padding: 2px 5px;
+    font-size: 6px;
     line-height: 1.5;
-    border-radius: 3px
+    border-radius: 1.5px
 }
 
 .btn-group-lg > .btn {
