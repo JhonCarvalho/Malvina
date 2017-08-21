@@ -6,9 +6,16 @@
 // Adicionar //
 $(document).ready(function(){
     jsonDespesa = {};
-    item= [];
-dialogDespesa = $('#dialogDespesa'),
+    jsonEquipe = {};
+    item = [];
+    itemEquipe = [];
+    totalDespesa = parseFloat("0");
+    totalEquipe= parseFloat("0");
+
+    dialogDespesa = $('#dialogDespesa'),
     form = "",
+        dialogEquipe = $('#dialogEquipe'),
+
 addDespesa = function (){
     var baseUrl = document.location.origin;
     
@@ -61,16 +68,35 @@ dialogoDespesa=$("#dialogDespesa").dialog({
         despesa = $('#despesa').serialize();
         despesa = despesa.split('&');
         desc= despesa[0].split('=')[1];
-        valor= despesa[1].split('=')[1];
-
+        valor= parseFloat(despesa[1].split('=')[1]);
+        totalDespesa+= valor;
         //for(var i= 0;i<jsonDespesa.length)
         jsonDespesa= {
             desc:desc,
             valor:valor
         }
+
+        itemEquipe.push(jsonDespesa);
+        $('#pdesp').html($('#pdesp').html()+'<li>'+desc+' - '+valor+'</button></li>');
+        $('#tdesp').html('R$ '+totalDespesa);
+    }
+
+    criarArrayEquipe = function(){
+
+        despesa = $('#despesa').serialize();
+        despesa = despesa.split('&');
+        desc= despesa[0].split('=')[1];
+        valor= parseFloat(despesa[1].split('=')[1]);
+        totalDespesa+= valor;
+        //for(var i= 0;i<jsonDespesa.length)
+        jsonDespesa= {
+            desc:desc,
+            valor:valor
+        }
+
         item.push(jsonDespesa);
         $('#pdesp').html($('#pdesp').html()+'<li>'+desc+' - '+valor+'</button></li>');
-
+        $('#tdesp').html('R$ '+totalDespesa);
     }
 
 });
