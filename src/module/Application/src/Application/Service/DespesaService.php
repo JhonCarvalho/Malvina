@@ -9,23 +9,21 @@
 namespace Application\Service;
 
 
-use Application\Entity\Evento;
 use Doctrine\ORM\EntityManager;
 use Zend\ServiceManager\ServiceManager;
 
-class EventoService
+class DespesaService
 {
-    public static $entity = 'Application\Entity\Evento';
+    public static $entity = 'Application\Entity\Despesa';
 
     protected $sm;
     protected $em;
 
     public function __construct(ServiceManager $serviceManager, EntityManager $entityManger)
     {
-        $this->sm = $serviceManager;
+      $this->sm = $serviceManager;
         $this->em = $entityManger;
     }
-
     public function getServiceManager()
     {
         return $this->sm;
@@ -36,23 +34,14 @@ class EventoService
         return $this->em;
     }
 
-    public function getRepository()
-    {
+    public function getRepository(){
         return $this->getEntityManager()->getRepository(self::$entity);
     }
 
-    public function inserir($data)
-    {
+    public function inserir($data){
+        
         $this->getEntityManager()->persist($data);
         return $this->getEntityManager()->flush();
     }
 
-    public function retornaById($id)
-    {
-        $evento = new Evento();
-        $evento = $this->em->find(self::$entity, $id);
-
-        return $evento;
-
-    }
 }

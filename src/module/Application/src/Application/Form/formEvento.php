@@ -134,8 +134,8 @@ class formEvento extends Form
             'options' => array(
                 'label' => 'Operação',
                 'value_options'=>array(
-                    'D'=>'Investimento',
-                    'C'=>'Show'
+                    'I'=>'Investimento',
+                    'S'=>'Show'
                 )
             ),
             'name' => 'operacao',

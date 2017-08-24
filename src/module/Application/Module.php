@@ -17,7 +17,7 @@ class Module
 {
     public function onBootstrap(MvcEvent $e)
     {
-        $eventManager        = $e->getApplication()->getEventManager();
+        $eventManager = $e->getApplication()->getEventManager();
         $moduleRouteListener = new ModuleRouteListener();
         $moduleRouteListener->attach($eventManager);
     }
@@ -38,13 +38,25 @@ class Module
         );
     }
 
-    public function getServiceConfig(){
+    public function getServiceConfig()
+    {
         return array(
-            'factories'=>["EventoService" => function(ServiceManager $serviceManager){
+            'factories' => array("DespesaService" => function (ServiceManager $serviceManager) {
                 $em = $serviceManager->get('Doctrine\ORM\EntityManager');
-                return new Service\EventoService($serviceManager, $em);
-            }]
+                return new Service\DespesaService($serviceManager, $em);
+            },
+                "EventoService" => function (ServiceManager $serviceManager) {
+                    $em = $serviceManager->get('Doctrine\ORM\EntityManager');
+                    return new Service\EventoService($serviceManager, $em);
+                },
+                "EquipeService" => function (ServiceManager $serviceManager) {
+                    $em = $serviceManager->get('Doctrine\ORM\EntityManager');
+                    return new Service\EquipeService($serviceManager, $em);
+                },
+
+            )
+
         );
     }
-    
+
 }

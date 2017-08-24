@@ -1,8 +1,8 @@
 <h1>Novo Evento</h1>
 
 <?php
-     echo $this->headScript()
-        ->prependFile($this->basePath() . '/js/app/evento/index.js');
+
+
 
 
 $form = $this->form;
@@ -16,14 +16,14 @@ echo $this->FormRow($form->get('local')) . "</br></br>";
 echo '</th><th>';
 echo $this->FormRow($form->get('dt_evento')) . "</br></br>";
 echo '</th></tr>';
-echo'<tr><th>';
+echo '<tr><th>';
 echo $this->FormRow($form->get('vl_total')) . "</br></br>";
 echo '</th><th>';
 echo $this->FormRow($form->get('contratante')) . "</br></br>";
 echo '</th><th>';
 echo $this->FormRow($form->get('vendedor')) . "</br></br>";
 echo '</th></tr>';
-echo'<tr><th>';
+echo '<tr><th>';
 echo $this->FormRow($form->get('vl_liquido')) . "</br></br>";
 echo '</th><th>';
 echo $this->FormRow($form->get('operacao')) . "</br></br>";
@@ -31,39 +31,40 @@ echo $this->FormRow($form->get('operacao')) . "</br></br>";
 echo '</th><th>';
 echo $this->FormRow($form->get('vl_caixa')) . "</br></br>";
 echo '</th></tr>';
-echo'<tr><th>';
+echo '<tr><th>';
 echo $this->FormRow($form->get('cache_integrante')) . "</br></br>";
 echo '</th><th>';
 echo $this->FormRow($form->get('descricao')) . "</br></br>";
-echo '</th><th>';
-echo $this->FormRow($form->get('salvar')).'     ';
+echo '</th><th id="thBtn" style="float: right;margin-top:30px ">';
+echo $this->FormRow($form->get('salvar')) . '     ';
 echo $this->FormRow($form->get('cancelar')) . "</br></br>";
 echo '</th></tr></table></div>';
 
 echo $this->form()->closeTag($form);
 ?>
-<div class='divDespesa'>
-    <h2>Despesas <a id="desp" onclick="addDespesa()" class="btn btn-danger"><span class="glyphicon glyphicon-plus"></span></a></h2>
-    <ul id="pdesp" ></ul>
+<div class='divDespesa' style="position: relative">
+    <h2>Despesas <a id="desp" onclick="addDespesa()" class="btn btn-danger"><span
+                class="glyphicon glyphicon-plus"></span></a></h2>
+    <ul id="pdesp"></ul>
     <p style="float: right;" id="tdesp"></p>
 </div>
-<div class='divDespesa'>
-    <h2>   Equipe  <a id="eq" class="btn btn-danger"><span class="glyphicon glyphicon-plus"></span></a></h2>
-    <ul id="pEq" >
-        <li>Fotógrafo - 150</li>
+<div class='divDespesa' style="position: relative">
+    <h2> Equipe <a id="eq" onclick="addEquipe()" class="btn btn-danger"><span
+                class="glyphicon glyphicon-plus"></span></a></h2>
+    <ul id="pEq">
     </ul>
-    <p style="float: right;" id="tEq">R$ 150.00</p>
+    <p style="float: right;" id="tEq"></p>
 </div>
 </div>
 <script>
-  /*  $('#eq').on('click', function () {
-        $('#peq').html($('#peq').html()+'<br>ooo');
-    });
+    /*  $('#eq').on('click', function () {
+     $('#peq').html($('#peq').html()+'<br>ooo');
+     });
 
-    $('#desp').on('click', function () {
-        $('#pdesp').html($('#pdesp').html()+'<br>ooo');
-    });*/
+     $('#desp').on('click', function () {
+     $('#pdesp').html($('#pdesp').html()+'<br>ooo');
+     });*/
 </script>
 
 <div id="dialogDespesa"></div>
-
+<div id="dialogEquipe"></div>

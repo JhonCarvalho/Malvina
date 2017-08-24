@@ -9,8 +9,11 @@
 namespace Application\Controller;
 
 
+use Application\Entity\Despesa;
+use Application\Entity\Equipe;
 use Application\Entity\Evento;
 use Application\Form\formDespesa;
+use Application\Form\formEquipe;
 use Application\Form\formEvento;
 
 use Zend\Mvc\Controller\AbstractActionController;
@@ -28,10 +31,13 @@ class EventoController extends AbstractActionController
     
     public function addAction(){
         $data = $this->getRequest();
-
+        //var_dump($data);exit;
+        $response = $this->getResponse();
         if($data->isPost()){
+
             $eventoService = $this->getServiceLocator()->get('EventoService');
             $evento = new Evento();
+            
             try{
                 $evento->setContratante($data->getPost('contratante'));
                 $evento->setLocal($data->getPost('local'));
@@ -45,12 +51,18 @@ class EventoController extends AbstractActionController
                 $evento->setNomeEvento($data->getPost('nome_evento'));
                 $evento->setOperacao($data->getPost('operacao'));
                 $eventoService->inserir($evento);
-                //var_dump($evento);exit;
 
+               // var_dump($evento->getIdEvento());exit;
+                $id['idevento'] = $evento->getIdEvento();
+                $response->setContent(json_encode($id));
+                return $response;
+                
             }catch(\Exception $e){
 
             }
+            
         }else{
+
             $form = new formEvento();
             $resp = array('form' =>$form);
             // var_dump($form);exit;
@@ -58,14 +70,88 @@ class EventoController extends AbstractActionController
         }
         
     }
+
+
     public function menuDespesaAction(){
 
         $data = $this->getRequest();
-
+        $response = $this->getResponse();
         if($data->isPost()){
+            try {
+                $despesa = $data->getPost('item');
 
+                $idEvento = (int)$data->getPost('idevento');
+                $evento = new Evento();
+                $despesaService = $this->getServiceLocator()->get('DespesaService');
+                $eventoService = $this->getServiceLocator()->get('EventoService');
+                $evento = $eventoService->retornaById($idEvento);
+
+                foreach ($despesa as $d) {
+
+                    $desp = new Despesa();
+                    $desp->setDescricao($d['desc']);
+                    $desp->setVlTotal((double)$d['valor']);
+                    $desp->setIdEvento($evento);
+
+                    $despesaService->inserir($desp);
+                    //$desp->set
+                }
+                $msg['msg'] = "Inserido com sucesso";
+                $response->setContent(json_encode($msg));
+                return $response;
+                
+            }catch (\Exception $e){
+                
+            }
+
+            
         }else{
             $form = new formDespesa();
+            $resp = array('form'=>$form);
+            $viewModel = new ViewModel($resp);
+            $viewModel->setTerminal(true);
+            return $viewModel;
+        }
+
+    }
+
+    public function menuEquipeAction(){
+
+        $data = $this->getRequest();
+        $response = $this->getResponse();
+        if($data->isPost()){
+            try {
+                $equipe = $data->getPost('itemEquipe');
+                //var_dump($equipe);exit;
+                $idEvento = (int)$data->getPost('idevento');
+                //var_dump($equipe,$idEvento);exit;
+                $evento = new Evento();
+                $equipeService = $this->getServiceLocator()->get('EquipeService');
+                $eventoService = $this->getServiceLocator()->get('EventoService');
+                $evento = $eventoService->retornaById($idEvento);
+
+                foreach ($equipe as $e) {
+
+                    $eqp = new Equipe();
+                    $eqp->setIdEvento($evento);
+                    $eqp->setCache($e['cache']);
+                    $eqp->setFuncao($e['funcao']);
+                    $eqp->setNome($e['nome']);
+
+                    $equipeService->inserir($eqp);
+                    //$desp->set
+                }
+                $msg['msg'] = "Inserido com sucesso";
+                $response->setContent(json_encode($msg));
+                return $response;
+
+            }catch (\Exception $e){
+
+            }
+
+
+        }else{
+            $form = new formEquipe();
             $resp = array('form'=>$form);
             $viewModel = new ViewModel($resp);
             $viewModel->setTerminal(true);

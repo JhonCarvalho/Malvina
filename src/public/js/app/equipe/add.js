@@ -1,21 +1,21 @@
 $(document).ready(function(){
     var baseUrl = document.location.origin;
 
-    inserirDespesa = function (e,id) {
+    inserirEquipe = function (e,id) {
 
 
         var baseUrl = document.location.origin;
 
-        var dados = item
+        var dados = itemEquipe;
        
         console.log(dados);
 
 
         $.ajax({
             type: "POST",
-            url: baseUrl + "/malvina/Malvina/src/public/evento/menu-despesa",
+            url: baseUrl + "/malvina/Malvina/src/public/evento/menu-equipe",
             data:{
-                'item':item,
+                'itemEquipe':itemEquipe,
                 'idevento':id
             },
             cache: false,

@@ -5,6 +5,7 @@
  */
 // Adicionar //
 $(document).ready(function(){
+
     jsonDespesa = {};
     jsonEquipe = {};
     item = [];
@@ -13,8 +14,8 @@ $(document).ready(function(){
     totalEquipe= parseFloat("0");
 
     dialogDespesa = $('#dialogDespesa'),
-    form = "",
-        dialogEquipe = $('#dialogEquipe'),
+    dialogEquipe = $('#dialogEquipe'),
+        
 
 addDespesa = function (){
     var baseUrl = document.location.origin;
@@ -76,27 +77,84 @@ dialogoDespesa=$("#dialogDespesa").dialog({
             valor:valor
         }
 
-        itemEquipe.push(jsonDespesa);
+        item.push(jsonDespesa);
+        //$('#pdesp').tooltip({title: "<a href='www.google.com'>google</a>", html: true, placement: "bottom"});
         $('#pdesp').html($('#pdesp').html()+'<li>'+desc+' - '+valor+'</button></li>');
         $('#tdesp').html('R$ '+totalDespesa);
     }
 
-    criarArrayEquipe = function(){
 
-        despesa = $('#despesa').serialize();
-        despesa = despesa.split('&');
-        desc= despesa[0].split('=')[1];
-        valor= parseFloat(despesa[1].split('=')[1]);
-        totalDespesa+= valor;
-        //for(var i= 0;i<jsonDespesa.length)
-        jsonDespesa= {
-            desc:desc,
-            valor:valor
+
+    //////////////////EQUIPE /////////////////////////
+
+    addEquipe = function (){
+        var baseUrl = document.location.origin;
+
+        $.ajax({
+            url:baseUrl+'/malvina/Malvina/src/public/evento/menu-equipe',
+            cache:false,
+            success:function (dados){
+                //console.log(dados);
+                $('#dialogEquipe').html(dados),
+                    dialogEquipe.dialog('open');
+            },
+            error: function(){
+            }
+
+        });
+    },
+
+    dialogoEquipe=$("#dialogEquipe").dialog({
+        autoOpen:false,
+        title:"Adicionar Equipe",
+        heigth:600,
+        width:550,
+        modal:true,
+        show:{
+            effect:'clip',
+            duration:150,
+
+        },
+        hide:{
+            effect:'clip',
+            duration:150,
+        },
+        buttons:{
+            Salvar:function(){
+                criarArrayEquipe();
+                dialogoEquipe.empty();
+                dialogoEquipe.dialog('close');
+
+            },
+            Cancel: function(){
+                dialogoEquipe.dialog('close');
+            }
+
         }
 
-        item.push(jsonDespesa);
-        $('#pdesp').html($('#pdesp').html()+'<li>'+desc+' - '+valor+'</button></li>');
-        $('#tdesp').html('R$ '+totalDespesa);
+
+    });
+    
+    criarArrayEquipe = function(){
+
+        equipe = $('#equipe').serialize();
+        //console.log(equipe);
+        equipe = equipe.split('&');
+
+        nome = equipe[0].split('=')[1];
+        funcao= equipe[1].split('=')[1];
+        cache= parseFloat(equipe[2].split('=')[1]);
+        totalEquipe+= cache;
+        //for(var i= 0;i<jsonDespesa.length)
+        jsonEquipe= {
+            nome :nome,
+            funcao:funcao,
+            cache:cache
+        }
+        //console.log(jsonEquipe);
+        itemEquipe.push(jsonEquipe);
+        $('#pEq').html($('#pEq').html()+'<li>'+nome+' - '+funcao+' - '+cache+'</button></li>');
+        $('#tEq').html('R$ '+totalEquipe);
     }
 
 });
