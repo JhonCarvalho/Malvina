@@ -16,7 +16,8 @@
         ->appendStylesheet($this->basePath() . '/css/jquery-ui.min.css')
         ->prependStylesheet($this->basePath() . '/css/style.css')
         ->prependStylesheet($this->basePath() . '/css/bootstrap-theme.min.css')
-        ->prependStylesheet($this->basePath() . '/css/bootstrap.min.css') ?>
+        ->prependStylesheet($this->basePath() . '/css/bootstrap.min.css')
+        ->prependStylesheet($this->basePath() . '/css/jquery.dataTables.css')?>
 
     <!-- Scripts -->
     <?php echo $this->headScript()
@@ -34,8 +35,9 @@
 
 </head>
 
-<body>
+<body onload="carregarGrid();">
 
+<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.15/css/jquery.dataTables.css"><font></font>
 <img class="evento" src="<?=$this->basePath('css/images/Dmalvina.png')?>" alt="não encontrado"/>
 
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">

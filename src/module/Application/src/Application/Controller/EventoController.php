@@ -159,4 +159,12 @@ class EventoController extends AbstractActionController
         }
 
     }
+
+    public function listarAction(){
+        $eventoService = $this->getServiceLocator()->get('EventoService');
+        $listEvento = $eventoService->findAll();
+    
+        return $this->getResponse()->setContent($listEvento);
+    }
+
 }

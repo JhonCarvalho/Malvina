@@ -5,7 +5,10 @@
  */
 // Adicionar //
 $(document).ready(function(){
+    
 
+    
+    var baseUrl = document.location.origin;
     jsonDespesa = {};
     jsonEquipe = {};
     item = [];
@@ -33,6 +36,7 @@ addDespesa = function (){
         
     });
 },
+        
 dialogoDespesa=$("#dialogDespesa").dialog({
     autoOpen:false,
     title:"Adicionar Despesa",
@@ -155,6 +159,78 @@ dialogoDespesa=$("#dialogDespesa").dialog({
         itemEquipe.push(jsonEquipe);
         $('#pEq').html($('#pEq').html()+'<li>'+nome+' - '+funcao+' - '+cache+'</button></li>');
         $('#tEq').html('R$ '+totalEquipe);
+    };
+
+    carregarGrid = function () {
+
+
+        $('#tbEvento').DataTable().destroy();
+
+        $('#tbEvento').DataTable({
+            "paging": true,
+            'searching': true,
+            "pageLength": 5,
+            "language": {
+                "sEmptyTable": "Nenhum registro encontrado para o filtro informado",
+
+                "sInfoEmpty": "Mostrando 0 até 0 de 0 registros",
+                "sInfoFiltered": "(Filtrados de MAX registros)",
+                "sInfoPostFix": "",
+                "sInfoThousands": ".",
+                "sLengthMenu": "",
+                "sLoadingRecords": "Carregando...",
+                "sProcessing": "Processando...",
+                "sZeroRecords": "Nenhum registro encontrado",
+                "sSearch": "Pesquisar",
+                "oPaginate": {
+                    "sNext": "Próximo",
+                    "sPrevious": "Anterior",
+                    "sFirst": "",
+                    "sLast": ""
+                },
+                "oAria": {
+                    "sSortAscending": ": Ordenar colunas de forma ascendente",
+                    "sSortDescending": ": Ordenar colunas de forma descendente"
+                }
+            },
+            "ajax": {
+                url: baseUrl + '/malvina/Malvina/src/public/evento/listar',
+                dataType: "JSON",
+                type: "GET",
+                dataSrc: '',
+            },
+
+            'columns': [
+
+                {data: "nome_evento"},
+                {data: function (data) {
+                    //console.log(data.dt_evento);
+                    dt = data.dt_evento;
+                    dt = dt.date.split(' ')[0];
+                    //console.log(dt);
+                    return dt;
+
+                }},
+                {data: "contratante"},
+                {data: "vendedor"},
+                {data: "vl_total"},
+                {
+                    data: function (data) {
+                        var id = 4;
+
+                        return ' <button  class="btn btn-warning " onclick="detalhar' +
+                            '(' + id + ',$(this))"><span class="glyphicon glyphicon-list"> Detalhar</span></button>';
+
+                    }
+                },
+
+            ],
+
+
+        });
+        
+
+
     }
 
 });

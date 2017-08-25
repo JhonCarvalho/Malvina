@@ -18,15 +18,20 @@ $(document).ready(function(){
          data:dados,
          cache: false,
          success: function (data) {
-            idevento = JSON.parse(data);
+            try {
+                idevento = JSON.parse(data);
 
-             console.log(idevento.idevento);
-             if(itemEquipe.length != 0) {
-                 inserirEquipe(e, idevento.idevento);
-             }
-             if(item.length != 0){
-             inserirDespesa(e,idevento.idevento);
-             }
+                console.log(idevento.idevento);
+                if (itemEquipe.length != 0) {
+                    inserirEquipe(e, idevento.idevento);
+                }
+                if (item.length != 0) {
+                    inserirDespesa(e, idevento.idevento);
+                }
+                location.href = baseUrl+"/malvina/Malvina/src/public/evento";
+            }catch(e){
+
+            }
 
 
          },

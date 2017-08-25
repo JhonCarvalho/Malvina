@@ -12,6 +12,7 @@ namespace Application\Service;
 use Application\Entity\Evento;
 use Doctrine\ORM\EntityManager;
 use Zend\ServiceManager\ServiceManager;
+use Zend\Stdlib\Hydrator\ClassMethods;
 
 class EventoService
 {
@@ -54,5 +55,21 @@ class EventoService
 
         return $evento;
 
+    }
+
+    public function findAll()
+    {
+
+        $lts = $this->em->getRepository(self::$entity)->findAll();
+        $hydrator = new ClassMethods(true);
+        $evento = array();
+
+        foreach ($lts as $e) {
+            //var_dump($e->getDtEvento());
+            $evento [] = $hydrator->extract($e);
+        }
+
+        //var_dump($evento);exit;
+        echo json_encode($evento);
     }
 }
